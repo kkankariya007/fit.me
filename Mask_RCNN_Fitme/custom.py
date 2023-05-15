@@ -32,12 +32,12 @@ class CustomConfig(Config):
     # Give the configuration a recognizable name
     NAME = "object"
 
-    # We use a GPU with 12GB memory, which can fit two images.
+    # We use a GPU with 24GB memory, which can fit two images.
     # Adjust down if you use a smaller GPU.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = 4
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 2  # Background + phone,laptop and mobile
+    NUM_CLASSES = 1 + 60  # Background + phone,laptop and mobile
 
     # Number of training steps per epoch
     STEPS_PER_EPOCH = 10
@@ -52,10 +52,6 @@ class CustomConfig(Config):
 class CustomDataset(utils.Dataset):
 
     def load_custom(self, dataset_dir, subset):
-        """Load a subset of the Dog-Cat dataset.
-        dataset_dir: Root directory of the dataset.
-        subset: Subset to load: train or val
-        """
         # Add classes. We have only one class to add.
         self.add_class("object", 1, "0,null")
         self.add_class("object", 2, "1,accessories")
